@@ -1,35 +1,591 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE ULIMATE BROTHER</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/7223/7223687.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rafe Altaf Shaikh — Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesclass="class="""heet"/>
+  <style>
+    :root {
+      --bg: #0b0e14;
+      --surface: #12161f;
+      --card: #181d29;
+      --border: #242b3d;
+      --accent: #00e5ff;
+      --accent2: #ff6b35;
+      --text: #e8eaf2;
+      --muted: #7a84a0;
+      --green: #39ff8f;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Animated grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: relative;
+      padding: 48px 0 36px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+      animation: fadeDown 0.7s ease both;
+    }
+
+    .badge {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--accent), #0091ea);
+      color: #000;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 4px 12px;
+      border-radius: 2px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, #fff 40%, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+    }
+
+    .tagline {
+      font-size: 1rem;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      margin-bottom: 24px;
+    }
+
+    .tagline span { color: var(--accent); }
+
+    /* ─── CONTACT BAR ─── */
+    .contact-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .contact-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 8px 14px;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .contact-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,229,255,0.15);
+    }
+
+    .contact-chip svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* ─── GRID LAYOUT ─── */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 700px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── SECTION ─── */
+    .section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 20px;
+      animation: fadeUp 0.6s ease both;
+      transition: border-color 0.2s;
+    }
+
+    .section:hover { border-color: rgba(0,229,255,0.3); }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
+
+    /* ─── PROFILE ─── */
+    .profile-text {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: #b8bdd4;
+    }
+
+    .profile-text strong { color: var(--accent); }
+
+    /* ─── EDUCATION ─── */
+    .edu-card {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .edu-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .edu-card a {
+      color: var(--accent);
+      text-decoration: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      transition: color 0.2s;
+    }
+
+    .edu-card a:hover { color: var(--accent2); text-decoration: underline; }
+
+    .edu-meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .edu-meta span {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 2px 8px;
+    }
+
+    .status-dot {
+      display: inline-block;
+      width: 7px; height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      margin-right: 4px;
+      animation: pulse 1.8s infinite;
+    }
+
+    /* ─── SKILLS ─── */
+    .skill-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .skill-item { display: flex; flex-direction: column; gap: 5px; }
+
+    .skill-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .skill-name { color: var(--text); }
+    .skill-pct { color: var(--muted); }
+
+    .bar-track {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--accent), #0091ea);
+      width: 0;
+      transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* ─── PROGRAMMING SKILLS ─── */
+    .prog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .prog-tag {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 8px;
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      transition: all 0.25s ease;
+      cursor: default;
+    }
+
+    .prog-tag:hover {
+      border-color: var(--accent2);
+      color: var(--accent2);
+      transform: scale(1.04);
+      box-shadow: 0 4px 14px rgba(255,107,53,0.15);
+    }
+
+    .prog-tag .icon { font-size: 18px; display: block; margin-bottom: 5px; }
+
+    /* ─── CERTIFICATES ─── */
+    .cert-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .cert-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .cert-item:hover {
+      border-color: var(--accent2);
+      transform: translateX(4px);
+    }
+
+    .cert-icon {
+      font-size: 22px;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .cert-info h4 { font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+    .cert-info p { font-size: 0.78rem; color: var(--muted); font-family: 'Space Mono', monospace; }
+
+    /* ─── AUTOCAD DETAIL ─── */
+    .detail-box {
+      background: var(--surface);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+      padding: 12px 16px;
+      margin-top: 10px;
+      font-size: 0.82rem;
+      color: #8a90ab;
+      line-height: 1.6;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+
+    .section:nth-child(1) { animation-delay: 0.1s; }
+    .section:nth-child(2) { animation-delay: 0.2s; }
+    .section:nth-child(3) { animation-delay: 0.3s; }
+    .section:nth-child(4) { animation-delay: 0.4s; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 40px;
+      letter-spacing: 2px;
+    }
+  </style>
 </head>
 <body>
-  <div>
-  <p class="center">dev of website is rafe
-  </p>
-  <p class="center">for the ultimate brother
-</p>
-<p class="center">rehan brother
-</p>
-<a href="rafe.jpg" class="link">rafe</a>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <header>
+    <div class="badge">Resume · 2025</div>
+    <h1>Rafe Altaf Shaikh</h1>
+    <p class="tagline">Diploma in Mechatronics &nbsp;·&nbsp; <span>Panvel, India</span></p>
+
+    <div class="contact-bar">
+      <a class="contact-chip" href="tel:+919987532694">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+        +91 99875 32694
+      </a>
+
+      <a class="contact-chip" href="mailto:Rafeshaikshaik447@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+        Rafeshaikshaik447@gmail.com
+      </a>
+
+      <a class="contact-chip" href="https://aiarkp.ac.in/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+        </svg>
+        aiarkp.ac.in
+      </a>
+
+      <span class="contact-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        Panvel, Navi Mumbai
+      </span>
+    </div>
+  </header>
+
+  <!-- MAIN GRID -->
+  <div class="grid">
+
+    <!-- LEFT COLUMN -->
+    <div>
+
+      <!-- PROFILE -->
+      <div class="section">
+        <div class="section-label">Profile</div>
+        <p class="profile-text">
+          A <strong>curious and driven</strong> Mechatronics engineering student with a passion for learning technologies at the intersection of mechanics, electronics, and software. Currently diving deep into <strong>Fusion 360</strong> to master 3D modeling and 2D drafting — always pushing to visualise complex systems with precision. I believe the best engineers are those who never stop asking <em>"how does this work?"</em>
+        </p>
+      </div>
+
+      <!-- EDUCATION -->
+      <div class="section">
+        <div class="section-label">Education</div>
+        <div class="edu-card">
+          <h3>Diploma in Mechatronics Engineering</h3>
+          <a href="https://aiarkp.ac.in/" target="_blank" rel="noopener">
+            Anjuman-I-Islam's Kalsekar Technical Campus →
+          </a>
+          <div class="edu-meta">
+            <span>
+              <span class="status-dot"></span>Currently Enrolled
+            </span>
+            <span>Aug 2024 – Present</span>
+            <span>Panvel, Maharashtra</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROGRAMMING & TOOLS -->
+      <div class="section">
+        <div class="section-label">Programming &amp; Tools</div>
+        <div class="prog-grid">
+          <div class="prog-tag"><span class="icon">🐍</span>Python</div>
+          <div class="prog-tag"><span class="icon">⚙️</span>Embedded C</div>
+          <div class="prog-tag"><span class="icon">🌐</span>HTML</div>
+          <div class="prog-tag"><span class="icon">🎨</span>CSS</div>
+          <div class="prog-tag"><span class="icon">📐</span>AutoCAD</div>
+          <div class="prog-tag"><span class="icon">🔩</span>Fusion 360</div>
+        </div>
+        <div class="detail-box">
+          <strong style="color:#e8eaf2">AutoCAD</strong> — Proficient in 2D Drafting, Layouts, and Geometric Dimensioning &amp; Tolerancing (GD&amp;T).<br/><br/>
+          <strong style="color:#e8eaf2">Technical Drawings</strong> — Solid understanding of engineering layouts, dimension standards, and mechanical schematics.
+        </div>
+      </div>
+
+      <!-- CERTIFICATES -->
+      <div class="section">
+        <div class="section-label">Achievements &amp; Certificates</div>
+        <div class="cert-list">
+          <div class="cert-item">
+            <div class="cert-icon">🏆</div>
+            <div class="cert-info">
+              <h4>1st Prize — Technical Quiz</h4>
+              <p>Competition Winner · Intercollegiate Event</p>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon">📄</div>
+            <div class="cert-info">
+              <h4>Technical Paper Presentation</h4>
+              <p>Participant · Academic Conference</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div>
+
+      <!-- LANGUAGES -->
+      <div class="section">
+        <div class="section-label">Languages</div>
+        <div class="skill-list" id="langBars">
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">Hindi</span>
+              <span class="skill-pct">Native</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" data-width="100"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">Marathi</span>
+              <span class="skill-pct">Native</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" data-width="100"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">English</span>
+              <span class="skill-pct">Conversational</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" data-width="60"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TECHNICAL SKILLS -->
+      <div class="section">
+        <div class="section-label">Technical Skills</div>
+        <div class="skill-list" id="techBars">
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">AutoCAD 2D</span>
+              <span class="skill-pct">Proficient</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" data-width="82"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">Embedded C</span>
+              <span class="skill-pct">Intermediate</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" data-width="65"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">Python</span>
+              <span class="skill-pct">Intermediate</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" data-width="60"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">HTML / CSS</span>
+              <span class="skill-pct">Intermediate</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" data-width="58"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">Fusion 360</span>
+              <span class="skill-pct">Learning</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" data-width="35" style="background: linear-gradient(90deg, var(--accent2), #ff9f1c);"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INTERESTS -->
+      <div class="section">
+        <div class="section-label">Currently Exploring</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span style="background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.25);border-radius:4px;padding:5px 10px;font-family:'Space Mono',monospace;font-size:11px;color:var(--accent)">3D Modelling</span>
+          <span style="background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.25);border-radius:4px;padding:5px 10px;font-family:'Space Mono',monospace;font-size:11px;color:var(--accent)">Robotics</span>
+          <span style="background:rgba(255,107,53,0.08);border:1px solid rgba(255,107,53,0.25);border-radius:4px;padding:5px 10px;font-family:'Space Mono',monospace;font-size:11px;color:var(--accent2)">Fusion 360</span>
+          <span style="background:rgba(255,107,53,0.08);border:1px solid rgba(255,107,53,0.25);border-radius:4px;padding:5px 10px;font-family:'Space Mono',monospace;font-size:11px;color:var(--accent2)">Mechatronics</span>
+          <span style="background:rgba(57,255,143,0.08);border:1px solid rgba(57,255,143,0.25);border-radius:4px;padding:5px 10px;font-family:'Space Mono',monospace;font-size:11px;color:var(--green)">IoT</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>RAFE ALTAF SHAIKH &nbsp;·&nbsp; MECHATRONICS &nbsp;·&nbsp; 2025</footer>
 </div>
-<div class="center">
 
-<p>you know who the hell is the best BROTHER in the world</p>
-<img src="" alt="">
-</div>
+<script>
+  // Animate bars on load using IntersectionObserver
+  const fills = document.querySelectorAll('.bar-fill');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        setTimeout(() => {
+          el.style.width = el.dataset.width + '%';
+        }, 100);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.3 });
 
-
-
-
-
-
-
-
-<script href="script.js"></script>
+  fills.forEach(f => observer.observe(f));
+</script>
 </body>
 </html>
